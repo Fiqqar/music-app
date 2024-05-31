@@ -66,8 +66,12 @@
         this.play(this.current);
       },
       play (song) {
-        this.current = song;
-        this.player.src = this.current.src;
+        if (typeof song.src != undefined) {
+          this.current = song;
+          this.player.src = this.current.src;
+          this.player.volume = 0.5;
+        }
+       
         this.player.play();
         this.player.addEventListener('ended', function(){
           this.index ++;
@@ -91,6 +95,10 @@
         this.current = this.songs[this.index];        
         this.play(this.current);
       }
+    },
+    created () {
+      this.current = this.songs[this.index];
+      this.player.src = this.current.src;
     }
   }
   </script>
